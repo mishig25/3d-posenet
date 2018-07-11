@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PoseNet - Camera Feed Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Controlling Virtual Character Through WebCam</h2>
+        <div id="loading"> Loading the model... </div>
+
+        <div class="row">
+            <div class="six columns" id="main" style="display:none">
+                <video id="video" playsinline="" style=" -moz-transform: scaleX(-1);
+                    -o-transform: scaleX(-1);
+                    -webkit-transform: scaleX(-1);
+                    transform: scaleX(-1);
+                    display: none;
+                    ">
+                </video>
+                <canvas id="output" width="500" height="500">
+            </canvas></div>
+            <div class="six columns">
+                <canvas id="babylon" width="500" height="500">
+            </canvas></div>
+        </div>
+    </div>
+    <script src="/dist/41dec2d6950e2fe070a161e553ca946f.js"></script>
+</body>
+
+</html>
