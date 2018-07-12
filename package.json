@@ -11,7 +11,8 @@
   "dependencies": {
     "@tensorflow-models/posenet": "0.1.2",
     "@tensorflow/tfjs": "0.11.4",
-    "babylonjs": "^3.2.0"
+    "babylonjs": "^3.2.0",
+    "markdown": "^0.5.0"
   },
   "scripts": {
     "watch": "NODE_ENV=development parcel --no-hmr --open index.html ",

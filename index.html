@@ -2,32 +2,41 @@
 <html>
 
 <head>
-    <title>PoseNet - Camera Feed Demo</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <title>3D & Posenet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
     <div class="container">
-        <h2>Controlling Virtual Character Through WebCam</h2>
+        <h2 class="text-center" style="margin-top: 20px; margin-bottom: 20px;">
+            Controlling Virtual Character Through WebCam
+        </h2>
+        <h5>
+            Note: make sure only a single person is in the scene. Otherwise, the results might be inaccurate.
+        </h5>
         <div id="loading"> Loading the model... </div>
-
-        <div class="row">
-            <div class="six columns" id='main' style='display:none'>
-                <video id="video" playsinline style=" -moz-transform: scaleX(-1);
-                    -o-transform: scaleX(-1);
-                    -webkit-transform: scaleX(-1);
-                    transform: scaleX(-1);
-                    display: none;
-                    ">
-                </video>
-                <canvas id="output" width="500" height="500" />
+        <div class="row"  style="margin-bottom: 20px;">
+            <div class="col-6">
+                <div id='main' style='display:none'>
+                    <video id="video" playsinline style=" -moz-transform: scaleX(-1);
+                                    -o-transform: scaleX(-1);
+                                    -webkit-transform: scaleX(-1);
+                                    transform: scaleX(-1);
+                                    display: none;
+                                    ">
+                    </video>
+                    <canvas id="output" width="500" height="500" />
+                </div>
             </div>
-            <div class="six columns">
+            <div class="col-6">
                 <canvas id="babylon" width="500" height="500" />
             </div>
         </div>
+        <div id="description" />
     </div>
+    <script src="description.js"></script>
     <script src="posenet.js"></script>
 </body>
 

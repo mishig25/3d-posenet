@@ -3,7 +3,7 @@ import {drawKeypoints, drawSkeleton} from './demo_util';
 
 import Joints from './joints';
 import Transform from './tranform';
-import GraphicsEngine from './3d_render';
+import GraphicsEngine from './graphics';
 const joints = new Joints();
 
 
