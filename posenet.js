@@ -4,14 +4,7 @@ import {drawKeypoints, drawSkeleton} from './demo_util';
 import Joints from './joints';
 import Transform from './tranform';
 import GraphicsEngine from './graphics';
-const joints = new Joints();
 
-
-const graphics_engine = new GraphicsEngine('babylon', joints);
-graphics_engine.render();
-
-
-const transform = new Transform(joints);
 
 const videoWidth = 500;
 const videoHeight = 500;
@@ -32,12 +25,12 @@ export default class PoseNet{
         minPoseConfidence: 0.1,
         minPartConfidence: 0.5,
       },
-      output: {
-        showVideo: true,
-      },
       net: null,
     };
-
+    this.joints = new Joints();
+    this.transform = new Transform(this.joints);
+    this.graphics_engine = new GraphicsEngine('babylon', this.joints);
+    this.graphics_engine.render();
   }
   
   isMobile() {
@@ -118,25 +111,23 @@ export default class PoseNet{
 
       ctx.clearRect(0, 0, videoWidth, videoHeight);
 
-      if (self.state.output.showVideo) {
-        ctx.save();
-        ctx.scale(-1, 1);
-        ctx.translate(-videoWidth, 0);
-        ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
-        ctx.restore();
-      }
+      ctx.save();
+      ctx.scale(-1, 1);
+      ctx.translate(-videoWidth, 0);
+      ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
+      ctx.restore();
 
       // For each pose (i.e. person) detected in an image, loop through the poses
       // and draw the resulting skeleton and keypoints if over certain confidence
       // scores
       poses.forEach(({score, keypoints}) => {
         if (score >= minPoseConfidence) {
-          transform.updateKeypoints(keypoints, minPartConfidence);
-          const head = transform.head();
-          const rightShoulderAngle = transform.rotateJoint('leftShoulder', 'rightShoulder','rightElbow');
-          const rightArmAngle = transform.rotateJoint('rightShoulder', 'rightElbow', 'rightWrist');
-          const leftShoulderAngle = transform.rotateJoint('rightShoulder', 'leftShoulder', 'leftElbow');
-          const lefArmAngle = transform.rotateJoint('leftShoulder', 'leftElbow', 'leftWrist');
+          self.transform.updateKeypoints(keypoints, minPartConfidence);
+          const head = self.transform.head();
+          const rightShoulderAngle = self.transform.rotateJoint('leftShoulder', 'rightShoulder','rightElbow');
+          const rightArmAngle = self.transform.rotateJoint('rightShoulder', 'rightElbow', 'rightWrist');
+          const leftShoulderAngle = self.transform.rotateJoint('rightShoulder', 'leftShoulder', 'leftElbow');
+          const lefArmAngle = self.transform.rotateJoint('leftShoulder', 'leftElbow', 'leftWrist');
 
           drawKeypoints(keypoints.slice(0,5), minPartConfidence, ctx);
           drawSkeleton(keypoints, minPartConfidence, ctx);

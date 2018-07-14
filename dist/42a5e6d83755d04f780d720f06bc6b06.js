@@ -71,14 +71,14 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({15:[function(require,module,exports) {
+})({23:[function(require,module,exports) {
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],18:[function(require,module,exports) {
+},{}],31:[function(require,module,exports) {
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -103,7 +103,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],14:[function(require,module,exports) {
+},{}],16:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -290,7 +290,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],13:[function(require,module,exports) {
+},{}],15:[function(require,module,exports) {
 var global = (1,eval)("this");
 var process = require("process");
 // Copyright Joyent, Inc. and other Node contributors.
@@ -837,7 +837,7 @@ exports._extend = function (origin, add) {
 function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
-},{"./support/isBuffer":15,"inherits":18,"process":14}],12:[function(require,module,exports) {
+},{"./support/isBuffer":23,"inherits":31,"process":16}],13:[function(require,module,exports) {
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -2564,12 +2564,12 @@ function merge_text_nodes( jsonml ) {
   }
 } )() );
 
-},{"util":13}],6:[function(require,module,exports) {
+},{"util":15}],11:[function(require,module,exports) {
 // super simple module for the most common nodejs use case.
 exports.markdown = require("./markdown");
 exports.parse = exports.markdown.toHTML;
 
-},{"./markdown":12}],5:[function(require,module,exports) {
+},{"./markdown":13}],4:[function(require,module,exports) {
 
 },{}],2:[function(require,module,exports) {
 'use strict';
@@ -2583,5 +2583,5 @@ var descriptionMarkdown = 'This web app is an experiment to combine Machine Lear
 var desc = document.createElement('div');
 desc.innerHTML = _markdown.markdown.toHTML(descriptionMarkdown);
 description.appendChild(desc);
-},{"markdown":6,"fs":5}]},{},[2])
+},{"markdown":11,"fs":4}]},{},[2])
 //# sourceMappingURL=/dist/42a5e6d83755d04f780d720f06bc6b06.map
