@@ -22,7 +22,7 @@ navigator.getUserMedia = navigator.getUserMedia ||
 export default class PoseNet{
 
   constructor(){
-    this.guiState = {
+    this.state = {
       algorithm: 'single-pose',
       input: {
         outputStride: 16,
@@ -46,10 +46,10 @@ export default class PoseNet{
   }
 
   setupGui(cameras, net) {
-    this.guiState.net = net;
+    this.state.net = net;
 
     if (cameras.length > 0) {
-      this.guiState.camera = cameras[0].deviceId;
+      this.state.camera = cameras[0].deviceId;
     }
 
   }
@@ -100,36 +100,25 @@ export default class PoseNet{
 
     const self = this;
     async function poseDetectionFrame() {
-      if (self.guiState.changeToArchitecture) {
-        // Important to purge variables and free up GPU memory
-        self.guiState.net.dispose();
-
-        // Load the PoseNet model weights for either the 0.50, 0.75, 1.00, or 1.01
-        // version
-        self.guiState.net = await posenet.load(+self.guiState.changeToArchitecture);
-
-        self.guiState.changeToArchitecture = null;
-      }
-
       // Scale an image down to a certain factor. Too large of an image will slow
       // down the GPU
-      const imageScaleFactor = self.guiState.input.imageScaleFactor;
-      const outputStride = +self.guiState.input.outputStride;
+      const imageScaleFactor = self.state.input.imageScaleFactor;
+      const outputStride = +self.state.input.outputStride;
 
       let poses = [];
       let minPoseConfidence;
       let minPartConfidence;
 
-      const pose = await self.guiState.net.estimateSinglePose(
+      const pose = await self.state.net.estimateSinglePose(
         video, imageScaleFactor, flipHorizontal, outputStride);
       poses.push(pose);
 
-      minPoseConfidence = +self.guiState.singlePoseDetection.minPoseConfidence;
-      minPartConfidence = +self.guiState.singlePoseDetection.minPartConfidence;
+      minPoseConfidence = +self.state.singlePoseDetection.minPoseConfidence;
+      minPartConfidence = +self.state.singlePoseDetection.minPartConfidence;
 
       ctx.clearRect(0, 0, videoWidth, videoHeight);
 
-      if (self.guiState.output.showVideo) {
+      if (self.state.output.showVideo) {
         ctx.save();
         ctx.scale(-1, 1);
         ctx.translate(-videoWidth, 0);
@@ -144,14 +133,12 @@ export default class PoseNet{
         if (score >= minPoseConfidence) {
           transform.updateKeypoints(keypoints, minPartConfidence);
           const head = transform.head();
-          // const angle = transform.leftArm();
           const rightShoulderAngle = transform.rotateJoint('leftShoulder', 'rightShoulder','rightElbow');
           const rightArmAngle = transform.rotateJoint('rightShoulder', 'rightElbow', 'rightWrist');
           const leftShoulderAngle = transform.rotateJoint('rightShoulder', 'leftShoulder', 'leftElbow');
           const lefArmAngle = transform.rotateJoint('leftShoulder', 'leftElbow', 'leftWrist');
-          if(head) graphics_engine.updateOffsets(head.x, head.y);
 
-          drawKeypoints(keypoints, minPartConfidence, ctx);
+          drawKeypoints(keypoints.slice(0,5), minPartConfidence, ctx);
           drawSkeleton(keypoints, minPartConfidence, ctx);
         }
       });

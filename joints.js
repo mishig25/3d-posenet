@@ -5,7 +5,10 @@ export default class Joints{
             'rightShoulder': 0,
             'rightElbow': 0,
             'leftShoulder': 0,
-            'leftElbow': 0
+            'leftElbow': 0,
+            'head': {
+                'x': 0, 'y': 0
+            }
         }
     }
 
@@ -14,7 +17,6 @@ export default class Joints{
     }
 
     get(joint){
-        if (this.data[joint]) return this.data[joint];
-        return 0;
+        return this.data[joint];
     }
 }

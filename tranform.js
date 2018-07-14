@@ -39,25 +39,17 @@ export default class Transform{
 
     head(){
         if(this.keypoints['nose'] && this.headCenter && this.shoulderCenter){
-            var nose_x = this.keypoints['nose'].x;
-            var nose_y = this.keypoints['nose'].y;
+            var x = this.keypoints['nose'].x;
+            var y = this.keypoints['nose'].y;
             // get nose relative points from origin
-            nose_x = (this.headCenter.x - nose_x)/(this.distance/15);
-            nose_y = this.shoulderCenter.y - nose_y;
+            x = (this.headCenter.x - x)/(this.distance/15);
+            y = this.shoulderCenter.y - y;
             // normalize (i.e. scale it)
-            nose_y = this.map(nose_y,this.distance*1.5,this.distance*2.8,-2,2);
+            y = this.map(y,this.distance*1.5,this.distance*2.8,-2,2);
             // console.log(140/this.distance,260/this.distance);
-            return {'x':nose_x, 'y':nose_y};
+            this.joints.update('head', { x, y });
+            return { x, y };
         }
-    }
-
-    leftArm(){
-        if (this.keypoints['leftShoulder'] && this.keypoints['rightShoulder'] && this.keypoints['rightElbow']){
-            // calculate the angle
-            const angle = this.findAngle(this.keypoints['leftShoulder'], this.keypoints['rightShoulder'], this.keypoints['rightElbow']);
-            return angle;
-        }
-        return 0;
     }
 
     rotateJoint(jointA, jointB, jointC){
