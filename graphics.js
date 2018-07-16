@@ -41,16 +41,18 @@ export default class GraphicsEngine {
 
             this.scene.registerBeforeRender(() => {
 
-                sphere.position.x = 0 + this.joints.data.head.x;
-                sphere.position.y = 6 + this.joints.data.head.y;
+                const { data } = this.joints;
+
+                sphere.position.x = 0 + data.head.x;
+                sphere.position.y = 6 + data.head.y;
                 sphere.position.z = 5;
 
                 lookAtCtl.update();
 
-                right_shoulder_bone.rotation = new BABYLON.Vector3(0, 1.5 * this.joints.data.rightShoulder, 0);
-                right_arm_bone.rotation = new BABYLON.Vector3(0, this.joints.data.rightElbow, 0);
-                left_shoulder_bone.rotation = new BABYLON.Vector3(0, -1.5 * this.joints.data.leftShoulder, 0);
-                left_arm_bone.rotation = new BABYLON.Vector3(0, -this.joints.data.leftElbow, 0);
+                right_shoulder_bone.rotation = new BABYLON.Vector3(0, 1.5 * data.rightShoulder, 0);
+                right_arm_bone.rotation = new BABYLON.Vector3(0, data.rightElbow, 0);
+                left_shoulder_bone.rotation = new BABYLON.Vector3(0, -1.5 * data.leftShoulder, 0);
+                left_arm_bone.rotation = new BABYLON.Vector3(0, -data.leftElbow, 0);
 
 
                 boneAxesViewer.update();
