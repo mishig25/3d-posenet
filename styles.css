@@ -30,3 +30,9 @@
     left: 50%;
     margin-right: -50%;
 }
+
+#description{
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 20px;
+}

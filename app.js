@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactLoading from 'react-loading';
+import { markdown } from 'markdown';
+const fs = require("fs");
 
 import styles from './styles.css';
 
@@ -21,6 +23,8 @@ class App extends React.Component {
         this.joints = new Joints();
         this.graphics_engine = new GraphicsEngine(this.refs.babylon, this.joints);
         this.posenet = new PoseNet(this.joints, this.graphics_engine, this.refs);
+        const descContent = fs.readFileSync("./description.md", "utf-8");
+        this.refs.description.innerHTML = markdown.toHTML(descContent);
         await this.posenet.loadNetwork();
         this.setState({loading: false});
         this.posenet.startPrediction();
@@ -50,7 +54,7 @@ class App extends React.Component {
                         <canvas ref="babylon" width={500} height={500} />
                     </div>
                 </div>
-                <div id="description" />
+                <div ref="description" id="description"/>
             </div>
         );
     }
