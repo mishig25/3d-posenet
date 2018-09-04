@@ -2,8 +2,8 @@ import * as BABYLON from 'babylonjs';
 
 export default class GraphicsEngine {
 
-    constructor(canvas_name, _joints){
-        this.canvas = document.getElementById(canvas_name);
+    constructor(_canvas, _joints){
+        this.canvas = _canvas;
         this.engine = new BABYLON.Engine(this.canvas, true);
         this.joints = _joints;
         this.initScene();

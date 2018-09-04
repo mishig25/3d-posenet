@@ -1,10 +1,7 @@
 import * as posenet from '@tensorflow-models/posenet';
 import {drawKeypoints, drawSkeleton} from './demo_util';
 
-import Joints from './joints';
 import Transform from './tranform';
-import GraphicsEngine from './graphics';
-
 
 const videoWidth = 500;
 const videoHeight = 500;
@@ -14,7 +11,7 @@ navigator.getUserMedia = navigator.getUserMedia ||
 
 export default class PoseNet{
 
-  constructor(){
+  constructor(joints, graphicsEngine){
     this.state = {
       algorithm: 'single-pose',
       input: {
@@ -27,9 +24,9 @@ export default class PoseNet{
       },
       net: null,
     };
-    this.joints = new Joints();
+    this.joints = joints;
     this.transform = new Transform(this.joints);
-    this.graphics_engine = new GraphicsEngine('babylon', this.joints);
+    this.graphics_engine = graphicsEngine;
     this.graphics_engine.render();
   }
   
@@ -165,5 +162,5 @@ export default class PoseNet{
 
 }
 
-const pos = new PoseNet();
-pos.startPrediction();
+// const pos = new PoseNet();
+// pos.startPrediction();

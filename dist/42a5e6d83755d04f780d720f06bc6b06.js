@@ -78,7 +78,7 @@ module.exports = function isBuffer(arg) {
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],32:[function(require,module,exports) {
+},{}],33:[function(require,module,exports) {
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -103,7 +103,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],20:[function(require,module,exports) {
+},{}],22:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -837,7 +837,7 @@ exports._extend = function (origin, add) {
 function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
-},{"./support/isBuffer":23,"inherits":32,"process":20}],12:[function(require,module,exports) {
+},{"./support/isBuffer":23,"inherits":33,"process":22}],11:[function(require,module,exports) {
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -2569,7 +2569,7 @@ function merge_text_nodes( jsonml ) {
 exports.markdown = require("./markdown");
 exports.parse = exports.markdown.toHTML;
 
-},{"./markdown":12}],4:[function(require,module,exports) {
+},{"./markdown":11}],4:[function(require,module,exports) {
 
 },{}],2:[function(require,module,exports) {
 'use strict';

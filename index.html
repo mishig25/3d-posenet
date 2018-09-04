@@ -1,61 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
-    <title>3D & Posenet</title>
+    <title>Posenet and 3D</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-    <style>
-        .loader {
-            border: 16px solid #f3f3f3; /* Light grey */
-            border-top: 16px solid #3498db; /* Blue */
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+         crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="container">
-        <h2 class="text-center" style="margin-top: 20px; margin-bottom: 20px;">
-            Controlling Virtual Character Through WebCam
-        </h2>
-        <h5>
-            Note: make sure only a single person is in the scene. Otherwise, the results might be inaccurate.
-        </h5>
-        <div class="row"  style="margin-bottom: 20px;">
-            <div class="col-6">
-                <div id="loading" style="margin-top: auto;"> 
-                    <div class="loader"></div>
-                     Loading the Tensorflow model...
-                </div>
-                <div id='main' style='display:none'>
-                    <video id="video" playsinline style=" -moz-transform: scaleX(-1);
-                                    -o-transform: scaleX(-1);
-                                    -webkit-transform: scaleX(-1);
-                                    transform: scaleX(-1);
-                                    display: none;
-                                    ">
-                    </video>
-                    <canvas id="output" width="500" height="500" />
-                </div>
-            </div>
-            <div class="col-6">
-                <canvas id="babylon" width="500" height="500" />
-            </div>
-        </div>
-        <div id="description" />
+    <div id="react-container">
     </div>
-    <script src="description.js"></script>
-    <script src="posenet.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,20 @@
+#h2{
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+#row{
+    margin-bottom: 20px
+}
+
+#main{
+    display: none
+}
+
+#video{
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    display: none;
+}
