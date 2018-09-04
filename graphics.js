@@ -25,8 +25,6 @@ export default class GraphicsEngine {
             mesh.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             mesh.position = new BABYLON.Vector3(0, 0, 0);
 
-            // var animation = this.scene.beginAnimation(skeletons[0], 1, 100, true, 1.0);
-
             var head_bone = skeleton.bones[7];
             var chest_bone = skeleton.bones[3];
             var right_shoulder_bone = skeleton.bones[13];

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactLoading from 'react-loading';
 
 import styles from './styles.css';
 
@@ -12,13 +13,16 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.joints = new Joints();
         this.graphics_engine = new GraphicsEngine(this.refs.babylon, this.joints);
         this.posenet = new PoseNet(this.joints, this.graphics_engine, this.refs);
+        await this.posenet.loadNetwork();
+        this.setState({loading: false});
         this.posenet.startPrediction();
     }
 
@@ -33,9 +37,13 @@ class App extends React.Component {
                 </h5>
                 <div className="row"  id="row">
                     <div className="col-6">
-                        <div id='main'>
+                        <div style={{display:this.state.loading ? 'none' : 'block'}}>
                             <video ref="video" id="video" playsInline/>
                             <canvas ref="output" width={500} height={500} />
+                        </div>
+                        <div id="loader" style={{ display: !this.state.loading ? 'none' : 'block' }}>
+                            <h3 id="loadTitle">Tensorflow Model loading ...</h3>
+                            <ReactLoading type="cylon" color="grey" height={'20%'} width={'20%'} id="reactLoader"/>
                         </div>
                     </div>
                     <div className="col-6">

@@ -138,13 +138,14 @@ export default class PoseNet{
     poseDetectionFrame();
   }
 
-  async startPrediction() {
+  async loadNetwork(){
     // Load the PoseNet model weights with architecture 0.75
-    const net = await posenet.load();
+    this.net = await posenet.load();
+  }
 
+  async startPrediction() {    
     // document.getElementById('loading').style.display = 'none';
     // document.getElementById('main').style.display = 'block';
-
     let video;
 
     try {
@@ -156,12 +157,8 @@ export default class PoseNet{
       info.style.display = 'block';
       throw e;
     }
-
-    this.setupGui([], net);
-    this.detectPoseInRealTime(video, net);
+    this.setupGui([], this.net);
+    this.detectPoseInRealTime(video, this.net);
   }
 
 }
-
-// const pos = new PoseNet();
-// pos.startPrediction();
