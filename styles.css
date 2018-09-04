@@ -4,11 +4,11 @@
 }
 
 #row{
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 #main{
-    display: none
+    display: block;
 }
 
 #video{

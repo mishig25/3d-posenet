@@ -141,8 +141,8 @@ export default class PoseNet{
     // Load the PoseNet model weights with architecture 0.75
     const net = await posenet.load();
 
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('main').style.display = 'block';
+    // document.getElementById('loading').style.display = 'none';
+    // document.getElementById('main').style.display = 'block';
 
     let video;
 
