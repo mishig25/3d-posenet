@@ -18,7 +18,7 @@ class App extends React.Component {
     componentDidMount() {
         this.joints = new Joints();
         this.graphics_engine = new GraphicsEngine(this.refs.babylon, this.joints);
-        this.posenet = new PoseNet(this.joints, this.graphics_engine);
+        this.posenet = new PoseNet(this.joints, this.graphics_engine, this.refs);
         this.posenet.startPrediction();
     }
 
@@ -34,8 +34,8 @@ class App extends React.Component {
                 <div className="row"  id="row">
                     <div className="col-6">
                         <div id='main'>
-                            <video id="video" playsInline/>
-                            <canvas id="output" width={500} height={500} />
+                            <video ref="video" id="video" playsInline/>
+                            <canvas ref="output" width={500} height={500} />
                         </div>
                     </div>
                     <div className="col-6">

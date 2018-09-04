@@ -5,18 +5,17 @@ export default class GraphicsEngine {
     constructor(_canvas, _joints){
         this.canvas = _canvas;
         this.engine = new BABYLON.Engine(this.canvas, true);
+        this.engine.displayLoadingUI();
+        this.engine.loadingUIText = "Bablyon 3D Loading ...";
         this.joints = _joints;
         this.initScene();
+        this.engine.hideLoadingUI();
     }
 
     initScene(){
-
         this.scene = new BABYLON.Scene(this.engine);
-
         const camera = this.setCamera();
-
-        this.setSkybox();
-
+        // this.setSkybox();
         const sphere = BABYLON.MeshBuilder.CreateSphere('', { diameter: .0001 }, this.scene);
 
         BABYLON.SceneLoader.ImportMesh("", "/dist/Scenes/Dude/", "Dude.babylon", this.scene, (newMeshes, particleSystems, skeletons) => {

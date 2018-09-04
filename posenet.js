@@ -11,7 +11,7 @@ navigator.getUserMedia = navigator.getUserMedia ||
 
 export default class PoseNet{
 
-  constructor(joints, graphicsEngine){
+  constructor(joints, graphicsEngine, _htmlelems){
     this.state = {
       algorithm: 'single-pose',
       input: {
@@ -24,6 +24,7 @@ export default class PoseNet{
       },
       net: null,
     };
+    this.htmlElements = _htmlelems;
     this.joints = joints;
     this.transform = new Transform(this.joints);
     this.graphics_engine = graphicsEngine;
@@ -57,7 +58,7 @@ export default class PoseNet{
           'Browser API navigator.mediaDevices.getUserMedia not available');
     }
 
-    const video = document.getElementById('video');
+    const video = this.htmlElements.video;
     video.width = videoWidth;
     video.height = videoHeight;
 
@@ -80,7 +81,7 @@ export default class PoseNet{
   }
 
   detectPoseInRealTime(video, net) {
-    const canvas = document.getElementById('output');
+    const canvas = this.htmlElements.output;
     const ctx = canvas.getContext('2d');
     // since images are being fed from a webcam
     const flipHorizontal = true;
