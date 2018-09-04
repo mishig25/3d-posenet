@@ -144,8 +144,6 @@ export default class PoseNet{
   }
 
   async startPrediction() {    
-    // document.getElementById('loading').style.display = 'none';
-    // document.getElementById('main').style.display = 'block';
     let video;
 
     try {
