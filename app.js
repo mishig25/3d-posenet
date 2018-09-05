@@ -56,7 +56,8 @@ class App extends React.Component {
                 </h5>
                 <div className="row"  id="row">
                     <div className="col-6">
-                        <div style={{display:this.state.loading ? 'none' : 'block'}}>
+                        <div className="float-right"
+                            style={{display:this.state.loading ? 'none' : 'block'}}>
                             <video ref="video" id="video" playsInline/>
                             <canvas ref="output" width={500} height={500} />
                         </div>
