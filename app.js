@@ -10,8 +10,15 @@ import Joints from './joints';
 import GraphicsEngine from './graphics';
 import PoseNet from './posenet';
 
+/**
+ * React Component for runnign neural networks and 3D graphics
+ */
 class App extends React.Component {
 
+    /**
+     * the class constructor
+     * @param {args} props for the parent class
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +26,11 @@ class App extends React.Component {
         }
     }
 
+     /**
+     * One of React's life cycle methods
+     * Once the current React component is loaded, this function
+     * initializes neural network model, graphics engine, and webcam.
+     */
     async componentDidMount() {
         this.joints = new Joints();
         this.graphics_engine = new GraphicsEngine(this.refs.babylon, this.joints);
@@ -30,14 +42,17 @@ class App extends React.Component {
         this.posenet.startPrediction();
     }
 
+    /**
+     * React Component's render method for rendering HTML components
+     */
     render() {
         return (
             <div id="container">
                 <h2 className="text-center" id="h2">
                     Controlling Virtual Character Through WebCam
                 </h2>
-                <h5>
-                    Note: make sure only a single person is in the scene. Otherwise, the results might be inaccurate.
+                <h5 id="h5">
+                    Note: make sure to give webcam ACCESS and only a single person is in the scene. Otherwise, the results might be inaccurate.
                 </h5>
                 <div className="row"  id="row">
                     <div className="col-6">

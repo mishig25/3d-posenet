@@ -1,5 +1,10 @@
+/**
+ * Joints class for storing 
+ * joints data from posenet
+ */
 export default class Joints{
 
+    /** the class constructor */
     constructor(){
         this.data = {
             'rightShoulder': 0,
@@ -12,10 +17,12 @@ export default class Joints{
         }
     }
 
+    /** joint data setter */
     update(joint, val){
         this.data[joint] = val;
     }
 
+    /** joint data getter */
     get(joint){
         return this.data[joint];
     }

@@ -9,8 +9,18 @@ const videoHeight = 500;
 navigator.getUserMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
+/**
+ * Posenet class for loading posenet 
+ * and running inferences on it
+ */
 export default class PoseNet{
 
+  /**
+   * the class constructor
+   * @param {Joints} joints processes raw joints data from posenet
+   * @param {GraphicsEngine} graphicsEngine to which joints data will be fed
+   * @param {array} _htmlelems that will be used to present results
+   */
   constructor(joints, graphicsEngine, _htmlelems){
     this.state = {
       algorithm: 'single-pose',
@@ -31,27 +41,20 @@ export default class PoseNet{
     this.graphics_engine.render();
   }
   
+  /** Checks whether the device is mobile or not */
   isMobile() {
     const mobile = /Android/i.test(navigator.userAgent) || /iPhone|iPad|iPod/i.test(navigator.userAgent);
     return mobile;
   }
 
-  setupGui(cameras, net) {
-    this.state.net = net;
-
-    if (cameras.length > 0) {
-      this.state.camera = cameras[0].deviceId;
-    }
-
-  }
-
+  /** Starts webcam video */
   async loadVideo() {
     const video = await this.setupCamera();
     video.play();
-
     return video;
   }
 
+  /** Sets uo webcam */
   async setupCamera() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error(
@@ -80,6 +83,11 @@ export default class PoseNet{
     });
   }
 
+  /**
+   * Detects human pse from video stream using posenet
+   * @param {VideoObject} video 
+   * @param {TFModel} net 
+   */
   detectPoseInRealTime(video, net) {
     const canvas = this.htmlElements.output;
     const ctx = canvas.getContext('2d');
@@ -100,7 +108,7 @@ export default class PoseNet{
       let minPoseConfidence;
       let minPartConfidence;
 
-      const pose = await self.state.net.estimateSinglePose(
+      const pose = await self.net.estimateSinglePose(
         video, imageScaleFactor, flipHorizontal, outputStride);
       poses.push(pose);
 
@@ -138,11 +146,14 @@ export default class PoseNet{
     poseDetectionFrame();
   }
 
+  /** Loads the PoseNet model weights with architecture 0.75 */
   async loadNetwork(){
-    // Load the PoseNet model weights with architecture 0.75
     this.net = await posenet.load();
   }
 
+  /**
+   * Starts predicting human pose from webcam
+   */
   async startPrediction() {    
     let video;
 
@@ -155,7 +166,6 @@ export default class PoseNet{
       info.style.display = 'block';
       throw e;
     }
-    this.setupGui([], this.net);
     this.detectPoseInRealTime(video, this.net);
   }
 

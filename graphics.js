@@ -1,7 +1,15 @@
 import * as BABYLON from 'babylonjs';
 
+/**
+ * GraphicsEngine class for running BabylonJS
+ * and rendering 3D rigged character on it
+ */
 export default class GraphicsEngine {
-
+    /**
+     * the class constructor
+     * @param {HTMLCanvasElement} _canvas 
+     * @param {Joints} _joints 
+     */
     constructor(_canvas, _joints){
         this.canvas = _canvas;
         this.engine = new BABYLON.Engine(this.canvas, true);
@@ -12,30 +20,28 @@ export default class GraphicsEngine {
         this.engine.hideLoadingUI();
     }
 
+    /**
+     * Initialez the scene, creates the character
+     * and defines how should joints of the character be updated
+     */
     initScene(){
         this.scene = new BABYLON.Scene(this.engine);
         this.scene.clearColor = new BABYLON.Color3(0.5, 0.8, 0.5);
         const camera = this.setCamera();
-        // this.setSkybox();
         const sphere = BABYLON.MeshBuilder.CreateSphere('', { diameter: .0001 }, this.scene);
-
         BABYLON.SceneLoader.ImportMesh("", "/dist/Scenes/Dude/", "Dude.babylon", this.scene, (newMeshes, particleSystems, skeletons) => {
-
-            var mesh = newMeshes[0];
-            var skeleton = skeletons[0];
+            const mesh = newMeshes[0];
+            const skeleton = skeletons[0];
             mesh.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             mesh.position = new BABYLON.Vector3(0, 0, 0);
 
-            var head_bone = skeleton.bones[7];
-            var chest_bone = skeleton.bones[3];
-            var right_shoulder_bone = skeleton.bones[13];
-            var right_arm_bone = skeleton.bones[14];
-            var left_shoulder_bone = skeleton.bones[32];
-            var left_arm_bone = skeleton.bones[33];
+            const head_bone = skeleton.bones[7];
+            const right_shoulder_bone = skeleton.bones[13];
+            const right_arm_bone = skeleton.bones[14];
+            const left_shoulder_bone = skeleton.bones[32];
+            const left_arm_bone = skeleton.bones[33];
 
-            var lookAtCtl = new BABYLON.BoneLookController(mesh, head_bone, sphere.position, { adjustYaw: Math.PI * .5, adjustRoll: Math.PI * .5 });
-
-            var boneAxesViewer = new BABYLON.Debug.BoneAxesViewer(this.scene, left_shoulder_bone, mesh);
+            const lookAtCtl = new BABYLON.BoneLookController(mesh, head_bone, sphere.position, { adjustYaw: Math.PI * .5, adjustRoll: Math.PI * .5 });
 
             this.scene.registerBeforeRender(() => {
 
@@ -51,22 +57,20 @@ export default class GraphicsEngine {
                 right_arm_bone.rotation = new BABYLON.Vector3(0, data.rightElbow, 0);
                 left_shoulder_bone.rotation = new BABYLON.Vector3(0, -1.5 * data.leftShoulder, 0);
                 left_arm_bone.rotation = new BABYLON.Vector3(0, -data.leftElbow, 0);
-
-
-                boneAxesViewer.update();
-
             });
         });
     };
 
+    /** BabylonJS render function that is called every frame */
     render(){
-        var self = this;
+        const self = this;
         this.engine.runRenderLoop(() => {
             const self = this;
             if(self.scene) self.scene.render();
         });
     }
 
+    /** Sets up 3d virtual cam for the scene */
     setCamera(){
         const camera = new BABYLON.ArcRotateCamera("camera", 0, 1, 20, BABYLON.Vector3.Zero(), this.scene);
         camera.setTarget(new BABYLON.Vector3(0, 4, 0));
