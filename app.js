@@ -23,6 +23,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             loading: true,
+            webcam: true,
         }
     }
 
@@ -39,6 +40,13 @@ class App extends React.Component {
         this.refs.description.innerHTML = markdown.toHTML(descContent);
         await this.posenet.loadNetwork();
         this.setState({loading: false});
+        this.posenet.startPrediction().then((webcam) => {
+            this.setState({ webcam });
+        });
+    }
+
+    /** Asks for webcam access if ti was denied */
+    askWebCam(){
         this.posenet.startPrediction();
     }
 
@@ -59,7 +67,8 @@ class App extends React.Component {
                         <div className="float-right"
                             style={{display:this.state.loading ? 'none' : 'block'}}>
                             <video ref="video" id="video" playsInline/>
-                            <canvas ref="output" width={500} height={500} />
+                            <canvas ref="output" width={500} height={500} style={{ display: this.state.webcam ? 'block' : 'none' }}/>
+                            {!this.state.webcam && <WeCamAccess askForAccess={() => this.askWebCam()}/>}
                         </div>
                         <div id="loader" style={{ display: !this.state.loading ? 'none' : 'block' }}>
                             <h3 id="loadTitle">Tensorflow Model loading ...</h3>
@@ -76,8 +85,16 @@ class App extends React.Component {
     }
 }
 
+const WeCamAccess = ({askForAccess}) => (
+    <div id="webcamaccess" className="d-flex justify-content-center">
+        <h3>The device does not have a webcam OR webcam access was denied</h3>
+        <button onClick={askForAccess}>
+            Grant Webcam Access
+        </button>
+    </div>);
 
 ReactDOM.render(
     <App />,
     document.getElementById('react-container')
 );
+

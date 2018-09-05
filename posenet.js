@@ -156,17 +156,13 @@ export default class PoseNet{
    */
   async startPrediction() {    
     let video;
-
     try {
       video = await this.loadVideo();
     } catch (e) {
-      let info = document.getElementById('info');
-      info.textContent = 'this browser does not support video capture,' +
-          'or this device does not have a camera';
-      info.style.display = 'block';
-      throw e;
+      return false;
     }
     this.detectPoseInRealTime(video, this.net);
+    return true;
   }
 
 }
