@@ -18,8 +18,8 @@
     "react-loading": "^2.0.3"
   },
   "scripts": {
-    "watch": "NODE_ENV=development parcel --no-hmr --open index.html ",
-    "build": "NODE_ENV=production parcel build index.html  --no-minify --public-url ./",
+    "watch": "NODE_ENV=development BPATH=dist parcel --no-hmr --open index.html ",
+    "build": "NODE_ENV=production BPATH=3d-posenet parcel build index.html  --no-minify --public-url ./",
     "build-camera": "NODE_ENV=production parcel build camera.html  --no-minify --public-url ./",
     "lint": "eslint ."
   },
