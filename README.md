@@ -4,7 +4,7 @@ Personal Project
 
 #### Check out the Live Demo: [https://mishig25.github.io/3d-posenet/](https://mishig25.github.io/3d-posenet/)
 
-<img src="https://github.com/mishig25/3d-posenet/raw/master/dist/demo.gif" width="300">
+<img src="https://github.com/mishig25/3d-posenet/raw/master/dist/demo.gif" width="600">
 
 #### Description:
 
