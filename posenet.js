@@ -130,11 +130,14 @@ export default class PoseNet{
         if (score >= minPoseConfidence) {
           self.transform.updateKeypoints(keypoints, minPartConfidence);
           const head = self.transform.head();
-          drawKeypoints(keypoints.slice(0, 7), minPartConfidence, ctx);
+          const shouldMoveFarther = drawKeypoints(keypoints.slice(0, 7), minPartConfidence, ctx);
+          if (shouldMoveFarther){
+            ctx.font = "30px Arial";
+            ctx.fillText("Please Move Farther", Math.round(videoHeight / 2) - 100, Math.round(videoWidth / 2));
+          }
           drawSkeleton(keypoints, minPartConfidence, ctx);
         }
       });
-
       requestAnimationFrame(poseDetectionFrame);
     }
 

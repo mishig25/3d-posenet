@@ -68,6 +68,7 @@ class App extends React.Component {
                             style={{display:this.state.loading ? 'none' : 'block'}}>
                             <video ref="video" id="video" playsInline/>
                             <canvas ref="output" width={500} height={500} style={{ display: this.state.webcam ? 'block' : 'none' }}/>
+                            {/* <h1>Move Farther</h1> */}
                             {!this.state.webcam && <WeCamAccess askForAccess={() => this.askWebCam()}/>}
                         </div>
                         <div id="loader" style={{ display: !this.state.loading ? 'none' : 'block' }}>

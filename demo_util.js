@@ -60,16 +60,20 @@ export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
  * Draw pose keypoints onto a canvas
  */
 export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+  let shouldNotMoveFather = false;
   for (let i = 0; i < keypoints.length; i++) {
     const keypoint = keypoints[i];
 
     if (keypoint.score < minConfidence) {
+      if (keypoint.part == "leftShoulder" 
+        || keypoint.part == "rightShoulder") shouldNotMoveFather = true;
       continue;
     }
 
     const {y, x} = keypoint.position;
     drawPoint(ctx, y * scale, x * scale, 3, color);
   }
+  return shouldNotMoveFather;
 }
 
 /**
