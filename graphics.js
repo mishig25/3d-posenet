@@ -74,7 +74,7 @@ export default class GraphicsEngine {
     setCamera(){
         const camera = new BABYLON.ArcRotateCamera("camera", 0, 1, 20, BABYLON.Vector3.Zero(), this.scene);
         camera.setTarget(new BABYLON.Vector3(0, 4, 0));
-        camera.setPosition(new BABYLON.Vector3(0, 6, 12))
+        camera.setPosition(new BABYLON.Vector3(0, 5, 11))
         camera.attachControl(this.canvas, true);
         const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), this.scene);
         light.intensity = 0.7;

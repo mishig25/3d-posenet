@@ -130,12 +130,7 @@ export default class PoseNet{
         if (score >= minPoseConfidence) {
           self.transform.updateKeypoints(keypoints, minPartConfidence);
           const head = self.transform.head();
-          const rightShoulderAngle = self.transform.rotateJoint('leftShoulder', 'rightShoulder','rightElbow');
-          const rightArmAngle = self.transform.rotateJoint('rightShoulder', 'rightElbow', 'rightWrist');
-          const leftShoulderAngle = self.transform.rotateJoint('rightShoulder', 'leftShoulder', 'leftElbow');
-          const lefArmAngle = self.transform.rotateJoint('leftShoulder', 'leftElbow', 'leftWrist');
-
-          drawKeypoints(keypoints.slice(0,5), minPartConfidence, ctx);
+          drawKeypoints(keypoints.slice(0, 7), minPartConfidence, ctx);
           drawSkeleton(keypoints, minPartConfidence, ctx);
         }
       });
