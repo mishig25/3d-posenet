@@ -69,7 +69,7 @@ class App extends React.Component {
                             <video ref="video" id="video" playsInline/>
                             <canvas ref="output" width={500} height={500} style={{ display: this.state.webcam ? 'block' : 'none' }}/>
                             {/* <h1>Move Farther</h1> */}
-                            {!this.state.webcam && <WeCamAccess askForAccess={() => this.askWebCam()}/>}
+                            {!this.state.webcam && <WeCamAccess/>}
                         </div>
                         <div id="loader" style={{ display: !this.state.loading ? 'none' : 'block' }}>
                             <h3 id="loadTitle">Tensorflow Model loading ...</h3>
@@ -86,10 +86,10 @@ class App extends React.Component {
     }
 }
 
-const WeCamAccess = ({askForAccess}) => (
-    <div id="webcamaccess" className="d-flex justify-content-center">
+const WeCamAccess = () => (
+    <div id="webcamaccess">
         <h3>The device does not have a webcam OR webcam access was denied</h3>
-        <button onClick={askForAccess}>
+        <button onClick={() => window.open("https://support.google.com/chrome/answer/2693767?p=ui_voice_search&visit_id=636795900385001472-2266950072&rd=1", "_blank")}>
             Grant Webcam Access
         </button>
     </div>);
