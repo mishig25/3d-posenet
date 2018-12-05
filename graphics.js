@@ -29,7 +29,7 @@ export default class GraphicsEngine {
         this.scene.clearColor = new BABYLON.Color3(0.5, 0.8, 0.5);
         const camera = this.setCamera();
         const sphere = BABYLON.MeshBuilder.CreateSphere('', { diameter: .0001 }, this.scene);
-        BABYLON.SceneLoader.ImportMesh("", `/${process.env.BPATH}/Scenes/Dude/`, "Dude.babylon", this.scene, (newMeshes, particleSystems, skeletons) => {
+        BABYLON.SceneLoader.ImportMesh("", "/dist/Scenes/Dude/", "Dude.babylon", this.scene, (newMeshes, particleSystems, skeletons) => {
             const mesh = newMeshes[0];
             const skeleton = skeletons[0];
             mesh.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
