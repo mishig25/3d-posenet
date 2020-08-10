@@ -4,7 +4,12 @@ Personal Project
 
 #### Check out the Live Demo: [https://mishig25.github.io/3d-posenet/](https://mishig25.github.io/3d-posenet/)
 
+[`Master Branch`](https://github.com/mishig25/3d-posenet)
+<img src="https://github.com/mishig25/3d-posenet/raw/master/dist/demo_head.gif" width="600">
+
+[`Experimental Branch`](https://github.com/mishig25/3d-posenet/tree/experimental)
 <img src="https://github.com/mishig25/3d-posenet/raw/master/dist/demo.gif" width="600">
+Note: `Master Branch` contains functionalities only for head movements. `Experimental Branch` contains functionalities for arms movements as well; however, the functionalities for arms movements do  not work well enough to be added to `Master Branch` yet.
 
 #### Description:
 
